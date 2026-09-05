@@ -121,8 +121,8 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
         </p>
       )}
 
-      <p className="mt-1 text-[11px] text-slate-400">
-        You can choose multiple domains across Web Dev, AI/Data, Cloud, Agile, Soft Skills, etc.
+      <p className="mt-1 text-[11px] text-slate-500">
+        Type to search across <strong>Software, Hardware, SAP, School & PUC Tuitions, Engineering, PGCET, GATE, NEET, JEE, Vedic Maths</strong> & corporate fields.
       </p>
     </div>
   );
