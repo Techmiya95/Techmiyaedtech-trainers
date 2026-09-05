@@ -16,8 +16,8 @@ const MAX_RESUME_SIZE = 5 * 1024 * 1024; // 5MB
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024;  // 2MB
 
 export const locationSchema = z.object({
-  state: z.string().min(1, 'Please select a state'),
-  district: z.string().min(1, 'Please select a district')
+  state: z.string().optional().default(''),
+  district: z.string().optional().default('')
 });
 
 export const trainerFormSchema = z.object({

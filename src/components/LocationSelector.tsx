@@ -52,10 +52,10 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           {getIcon()}
-          <h4 className="font-semibold text-slate-800 text-sm">{title}</h4>
+          <h4 className="font-semibold text-slate-800 text-sm">{title} <span className="text-xs font-normal text-slate-400">(Optional)</span></h4>
         </div>
         <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${getBadgeColor()}`}>
-          Cascading
+          Optional
         </span>
       </div>
 
@@ -63,7 +63,7 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
         {/* State Select */}
         <div>
           <label className="block text-xs font-medium text-slate-600 mb-1">
-            State <span className="text-rose-500">*</span>
+            State
           </label>
           <select
             value={selectedState}
@@ -77,7 +77,7 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
                 : 'border-slate-300 focus:ring-blue-500/20 focus:border-blue-500 text-slate-800'
             }`}
           >
-            <option value="">-- Select State --</option>
+            <option value="">-- Select State (Optional) --</option>
             {INDIAN_STATES.map((state) => (
               <option key={state} value={state}>
                 {state}
@@ -92,7 +92,7 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
         {/* District Select */}
         <div>
           <label className="block text-xs font-medium text-slate-600 mb-1">
-            District <span className="text-rose-500">*</span>
+            District
           </label>
           <select
             value={selectedDistrict}
@@ -107,7 +107,7 @@ export const LocationSelector: React.FC<LocationSelectorProps> = ({
             }`}
           >
             <option value="">
-              {selectedState ? '-- Select District --' : 'First Select State'}
+              {selectedState ? '-- Select District (Optional) --' : 'Select State First'}
             </option>
             {districts.map((district) => (
               <option key={district} value={district}>

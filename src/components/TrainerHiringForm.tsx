@@ -144,9 +144,15 @@ export const TrainerHiringForm: React.FC<TrainerHiringFormProps> = ({ appsScript
         phone: data.phone.trim(),
         email: data.email.trim(),
         topicsInterested: data.topicsInterested.join(', '),
-        permanentLocation: `${data.permanentLocation.district}, ${data.permanentLocation.state}`,
-        currentLocation: `${data.currentLocation.district}, ${data.currentLocation.state}`,
-        preferredLocation: `${data.preferredLocation.district}, ${data.preferredLocation.state}`,
+        permanentLocation: (data.permanentLocation?.district || data.permanentLocation?.state)
+          ? `${data.permanentLocation.district || ''}, ${data.permanentLocation.state || ''}`.replace(/^,\s*|,\s*$/g, '')
+          : 'N/A',
+        currentLocation: (data.currentLocation?.district || data.currentLocation?.state)
+          ? `${data.currentLocation.district || ''}, ${data.currentLocation.state || ''}`.replace(/^,\s*|,\s*$/g, '')
+          : 'N/A',
+        preferredLocation: (data.preferredLocation?.district || data.preferredLocation?.state)
+          ? `${data.preferredLocation.district || ''}, ${data.preferredLocation.state || ''}`.replace(/^,\s*|,\s*$/g, '')
+          : 'N/A',
         experienceYears: Number(data.experienceYears),
         resumeUrl: '',
         imageUrl: '',
@@ -195,36 +201,10 @@ export const TrainerHiringForm: React.FC<TrainerHiringFormProps> = ({ appsScript
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-60 h-60 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 space-y-3">
-          <div className="flex items-center justify-between">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-cyan-300 text-xs font-semibold border border-cyan-500/30">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Join Techmiya Trainer Network</span>
-            </div>
-          </div>
-
+        <div className="relative z-10">
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
             Corporate Trainer Registration
           </h1>
-
-          <p className="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
-            Partner with Techmiya EdTech to train next-generation developers and professionals across India. Complete the application below to get onboarded.
-          </p>
-
-          <div className="pt-2 flex flex-wrap gap-4 text-xs font-medium text-slate-300">
-            <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-xs">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Verified Corporate Network</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-xs">
-              <ShieldCheck className="w-4 h-4 text-cyan-400" />
-              <span>Encrypted Data Encryption</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-xs">
-              <FileCheck className="w-4 h-4 text-purple-400" />
-              <span>Direct HR Evaluation</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -393,8 +373,8 @@ export const TrainerHiringForm: React.FC<TrainerHiringFormProps> = ({ appsScript
               <MapPin className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900">3. Location Details (Cascading State & District)</h2>
-              <p className="text-xs text-slate-500">Select State first to dynamically populate District options for each field</p>
+              <h2 className="text-lg font-bold text-slate-900">3. Location Details (Optional)</h2>
+              <p className="text-xs text-slate-500">Select State & District if you wish to specify location preferences</p>
             </div>
           </div>
 
