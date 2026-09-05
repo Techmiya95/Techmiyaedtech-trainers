@@ -5,13 +5,10 @@ export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: 'https://blogs.techmiyaedtech.com/' },
-    { name: 'Courses', href: 'https://blogs.techmiyaedtech.com/courses' },
-    { name: 'Reviews', href: 'https://blogs.techmiyaedtech.com/reviews' },
-    { name: 'Psychometric Test', href: 'https://blogs.techmiyaedtech.com/psychometric-test' },
-    { name: 'Contact', href: 'https://blogs.techmiyaedtech.com/contact' },
-    { name: 'Trainers', href: '#registration-form', isHighlighted: true },
-    { name: 'Jobs', href: 'https://blogs.techmiyaedtech.com/jobs' }
+    { name: 'Home', href: 'https://techmiyaedtech.com/' },
+    { name: 'Courses', href: 'https://techmiyaedtech.com/courses' },
+    { name: 'Contact', href: 'https://techmiyaedtech.com/contact' },
+    { name: 'Trainers', href: 'https://trainers.techmiyaedtech.com/', isHighlighted: true }
   ];
 
   return (
@@ -21,7 +18,7 @@ export const Header: React.FC = () => {
           {/* Brand Logo & Name */}
           <div className="flex items-center gap-3">
             <a
-              href="https://blogs.techmiyaedtech.com/"
+              href="https://techmiyaedtech.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 group shrink-0"
@@ -43,7 +40,7 @@ export const Header: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                target="_blank"
+                target={link.isHighlighted ? '_self' : '_blank'}
                 rel="noopener noreferrer"
                 className={`transition-colors ${
                   link.isHighlighted
@@ -59,7 +56,7 @@ export const Header: React.FC = () => {
           {/* Action Buttons */}
           <div className="hidden sm:flex items-center gap-2.5">
             <a
-              href="https://blogs.techmiyaedtech.com/"
+              href="https://lms.techmiyaedtech.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2 text-xs xl:text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-xl transition-all shadow-xs"
@@ -67,10 +64,12 @@ export const Header: React.FC = () => {
               Access LMS
             </a>
             <a
-              href="#registration-form"
+              href="https://techmiyaedtech.com/register"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2 text-xs xl:text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 rounded-xl transition-all shadow-xs"
             >
-              Register Now
+              Enquire Now
             </a>
           </div>
 
@@ -95,7 +94,7 @@ export const Header: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                target="_blank"
+                target={link.isHighlighted ? '_self' : '_blank'}
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`py-2 px-3 rounded-lg transition-colors ${
@@ -111,7 +110,7 @@ export const Header: React.FC = () => {
 
           <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
             <a
-              href="https://blogs.techmiyaedtech.com/"
+              href="https://lms.techmiyaedtech.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full text-center px-4 py-2.5 text-xs font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-xl shadow-xs"
@@ -119,11 +118,13 @@ export const Header: React.FC = () => {
               Access LMS
             </a>
             <a
-              href="#registration-form"
+              href="https://techmiyaedtech.com/register"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center px-4 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 rounded-xl shadow-xs"
             >
-              Register Now
+              Enquire Now
             </a>
           </div>
         </div>

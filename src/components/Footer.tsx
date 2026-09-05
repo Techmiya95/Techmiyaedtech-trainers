@@ -9,14 +9,16 @@ export const Footer: React.FC = () => {
           {/* Column 1: Logo, Tagline & Social Links */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img
-                src="/images/techmiyaedtech_new_logo.png"
-                alt="Techmiya Edtech Logo"
-                className="h-10 w-auto object-contain"
-              />
-              <span className="font-bold text-amber-500 text-lg tracking-wide">
-                Techmiya Edtech
-              </span>
+              <a href="https://techmiyaedtech.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+                <img
+                  src="/images/techmiyaedtech_new_logo.png"
+                  alt="Techmiya Edtech Logo"
+                  className="h-10 w-auto object-contain"
+                />
+                <span className="font-bold text-amber-500 text-lg tracking-wide">
+                  Techmiya Edtech
+                </span>
+              </a>
             </div>
 
             <p className="text-slate-300 text-xs leading-relaxed max-w-sm">
@@ -44,28 +46,23 @@ export const Footer: React.FC = () => {
             <h4 className="font-bold text-white text-base">Quick Links</h4>
             <ul className="space-y-2 text-slate-300 text-xs">
               <li>
-                <a href="https://blogs.techmiyaedtech.com/" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
+                <a href="https://techmiyaedtech.com/" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
                   Home
                 </a>
               </li>
               <li>
-                <a href="https://blogs.techmiyaedtech.com/" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
+                <a href="https://techmiyaedtech.com/courses" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
                   Courses
                 </a>
               </li>
               <li>
-                <a href="https://blogs.techmiyaedtech.com/" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
-                  Reviews
-                </a>
-              </li>
-              <li>
-                <a href="https://blogs.techmiyaedtech.com/" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
+                <a href="https://techmiyaedtech.com/contact" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
                   Contact
                 </a>
               </li>
               <li>
-                <a href="https://blogs.techmiyaedtech.com/" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">
-                  Terms & Condition
+                <a href="https://trainers.techmiyaedtech.com/" className="hover:text-amber-400 transition-colors">
+                  Trainers Portal
                 </a>
               </li>
             </ul>
