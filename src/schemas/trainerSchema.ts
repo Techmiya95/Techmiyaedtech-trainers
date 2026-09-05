@@ -82,7 +82,11 @@ export const trainerFormSchema = z.object({
     .refine((files) => {
       if (!files || files.length === 0) return false;
       return files[0].size <= MAX_IMAGE_SIZE;
-    }, 'Image file size must not exceed 2MB')
+    }, 'Image file size must not exceed 2MB'),
+
+  agreeCodeOfConduct: z
+    .boolean()
+    .refine((val) => val === true, 'You must read and agree to the Trainer Code of Conduct before registering.')
 });
 
 export type TrainerFormValues = z.infer<typeof trainerFormSchema>;

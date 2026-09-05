@@ -15,7 +15,10 @@ import {
   MapPin,
   Sparkles,
   ShieldCheck,
-  FileCheck
+  FileCheck,
+  AlertTriangle,
+  XCircle,
+  Shirt
 } from 'lucide-react';
 
 import { trainerFormSchema } from '../schemas/trainerSchema';
@@ -23,7 +26,7 @@ import type { TrainerFormValues } from '../schemas/trainerSchema';
 import { DomainSelect } from './DomainSelect';
 import { LocationSelector } from './LocationSelector';
 import { FileUploadField } from './FileUploadField';
-import { uploadFileToCloud, fileToBase64 } from '../services/fileUploadService';
+import { fileToBase64 } from '../services/fileUploadService';
 import { getStoredAppsScriptUrl, submitToGoogleSheets } from '../services/googleSheetsService';
 import type { FormSubmissionPayload } from '../types/trainer';
 import { SubmissionSuccessModal } from './SubmissionSuccessModal';
@@ -63,13 +66,52 @@ export const TrainerHiringForm: React.FC<TrainerHiringFormProps> = ({ appsScript
       preferredLocation: { state: '', district: '' },
       experienceYears: '' as any,
       resumeFile: null,
-      imageFile: null
+      imageFile: null,
+      agreeCodeOfConduct: false
     }
   });
 
   const permanentLoc = watch('permanentLocation');
   const currentLoc = watch('currentLocation');
   const preferredLoc = watch('preferredLocation');
+
+  const dosList = [
+    "Report to the college at least 30 minutes before the training session.",
+    "Wear complete formal attire during all classroom/training hours.",
+    "Display your Disciples India ID card at all times on campus.",
+    "Follow the training schedule and complete the assigned syllabus.",
+    "Maintain accurate attendance and submit daily reports.",
+    "Submit the Daily Training Report with attendance, topics covered, and photographs before 8:00 PM.",
+    "Maintain professionalism and treat students, faculty, and hostel staff with respect.",
+    "Stay only in the hostel room allotted by the college.",
+    "Keep your hostel room and training area neat and clean.",
+    "Immediately report any issues to the Project Coordinator.",
+    "Take care of college and hostel property.",
+    "Represent Disciples India with discipline, integrity, and professionalism at all times."
+  ];
+
+  const dontsList = [
+    "Shorts, sleeveless clothing, or casual lounge wear are strictly prohibited anywhere within the college campus premises, even after college hours.",
+    "Do not attend training sessions without complete formal dress.",
+    "Not to exchange or collect contact information of students.",
+    "Do not miss, delay, or cancel any session without prior approval.",
+    "Do not consume alcohol, smoke, or use tobacco during the assignment.",
+    "Do not invite friends or visitors to the hostel or campus.",
+    "Do not leave the hostel overnight without informing and obtaining approval from the Project Coordinator.",
+    "Do not use mobile phones during training except for official purposes.",
+    "Do not post photos or videos of students, faculty, or the campus on social media without permission.",
+    "Do not collect money, gifts, or personal favours from students.",
+    "Do not engage in arguments or use inappropriate language.",
+    "Do not disclose confidential project or student information.",
+    "Do not damage college or hostel property. Any damage caused due to negligence will be recovered from the trainer.",
+    "Do not behave in any manner that could affect the reputation of Disciples India or the institution."
+  ];
+
+  const dressCodeList = [
+    "👔 Formal dress is compulsory during classroom/training hours.",
+    "🚫 Shorts are strictly prohibited anywhere inside the college campus, including the hostel premises, Canteen, even after working hours.",
+    "👟 Wear clean, decent footwear and maintain a professional appearance throughout the assignment."
+  ];
 
   const onSubmit = async (data: TrainerFormValues) => {
     const activeUrl = appsScriptUrl || getStoredAppsScriptUrl();
@@ -96,7 +138,7 @@ export const TrainerHiringForm: React.FC<TrainerHiringFormProps> = ({ appsScript
         setImageProgress(100);
       }
 
-      // 3. Format payload for Google Apps Script (sending base64 files for Google Drive upload)
+      // 3. Format payload for Google Apps Script
       const payload: FormSubmissionPayload = {
         fullName: data.fullName.trim(),
         phone: data.phone.trim(),
@@ -403,7 +445,7 @@ export const TrainerHiringForm: React.FC<TrainerHiringFormProps> = ({ appsScript
             </div>
             <div>
               <h2 className="text-lg font-bold text-slate-900">4. Document & Media Attachments</h2>
-              <p className="text-xs text-slate-500">Upload your latest resume and profile image to be stored as CDN URLs in Google Sheet</p>
+              <p className="text-xs text-slate-500">Upload your latest resume and profile image to be stored in Google Drive</p>
             </div>
           </div>
 
@@ -445,6 +487,100 @@ export const TrainerHiringForm: React.FC<TrainerHiringFormProps> = ({ appsScript
                 />
               )}
             />
+          </div>
+        </div>
+
+        {/* Section 5: Mandatory Code of Conduct & Agreement */}
+        <div className="space-y-6 pt-4 border-t border-slate-100">
+          <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
+            <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-slate-900">5. Trainer Code of Conduct & Guidelines</h2>
+              <p className="text-xs text-slate-500">Review mandatory rules, dress code, and professional conduct expectations</p>
+            </div>
+          </div>
+
+          <div className="bg-slate-50/80 rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-6">
+            {/* DO's List */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-emerald-700 font-bold text-sm bg-emerald-100/70 px-3 py-1.5 rounded-lg w-fit">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>✅ DO's (Mandatory Guidelines)</span>
+              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs text-slate-700 font-medium">
+                {dosList.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2 bg-white p-2.5 rounded-xl border border-slate-200/80 shadow-2xs">
+                    <span className="bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.5 rounded-md text-[10px] shrink-0 mt-0.5">
+                      {idx + 1}
+                    </span>
+                    <span className="leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* DON'Ts List */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-rose-700 font-bold text-sm bg-rose-100/70 px-3 py-1.5 rounded-lg w-fit">
+                <XCircle className="w-4 h-4" />
+                <span>❌ DON'Ts (Strictly Prohibited)</span>
+              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs text-slate-700 font-medium">
+                {dontsList.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2 bg-white p-2.5 rounded-xl border border-slate-200/80 shadow-2xs">
+                    <span className="bg-rose-50 text-rose-700 font-bold px-1.5 py-0.5 rounded-md text-[10px] shrink-0 mt-0.5">
+                      {idx + 1}
+                    </span>
+                    <span className="leading-snug">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Dress Code Section */}
+            <div className="space-y-3 bg-amber-50/80 border border-amber-200/80 p-4 rounded-xl">
+              <div className="flex items-center gap-2 text-amber-900 font-bold text-sm">
+                <Shirt className="w-4 h-4 text-amber-600" />
+                <span>👔 Mandatory Dress Code Policy</span>
+              </div>
+              <ul className="space-y-2 text-xs text-amber-950 font-medium">
+                {dressCodeList.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Non-compliance Disclaimer Alert */}
+            <div className="flex items-start gap-3 bg-slate-900 text-white p-4 rounded-xl border border-slate-800">
+              <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+              <p className="text-xs leading-relaxed text-slate-200">
+                <strong className="text-amber-400 font-semibold">Notice of Liability:</strong> Non-compliance with these guidelines may result in immediate disciplinary action, termination/removal from the project, or recovery of any financial losses incurred.
+              </p>
+            </div>
+
+            {/* Mandatory Checkbox Agreement */}
+            <div className="pt-2">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-2xl bg-white border-2 border-indigo-200 hover:border-indigo-500 transition-all shadow-xs">
+                <input
+                  type="checkbox"
+                  {...register('agreeCodeOfConduct')}
+                  className="mt-0.5 w-5 h-5 text-indigo-600 rounded-md border-slate-300 focus:ring-indigo-500 cursor-pointer"
+                />
+                <span className="text-xs sm:text-sm font-bold text-slate-900 leading-snug">
+                  I have read, understood, and agree to strictly abide by Techmiya EdTech's Trainer Guidelines, Code of Conduct, and Mandatory Dress Code Policy. <span className="text-rose-500">*</span>
+                </span>
+              </label>
+              {errors.agreeCodeOfConduct && (
+                <p className="mt-2 text-xs text-rose-600 font-bold flex items-center gap-1">
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  <span>{errors.agreeCodeOfConduct.message}</span>
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
